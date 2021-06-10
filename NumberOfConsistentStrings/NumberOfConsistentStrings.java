@@ -1,36 +1,32 @@
 package NumberOfConsistentStrings;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class NumberOfConsistentStrings {
+
     public static int countConsistentStrings(String allowed, String[] words) {
-        int consistentStrings = 0;
 
-        System.out.println("allowed: " + allowed);
-        System.out.println("words: " + Arrays.toString(words));
+        int ans = words.length;
+        HashSet<Character> hash_set = new HashSet<>();
 
-        HashSet <Character> allowedSet = new HashSet<Character>();
-        allowed.chars().mapToObj(i -> (char)i).forEach(c -> allowedSet.add(c));
+        for (int k = 0; k < allowed.length(); k++) {
+            hash_set.add(allowed.charAt(k));
+        }
 
-        for (String word : words) {
-            int flag = 0;
-            for (int i = 0; i < word.length(); i++) {
-                if (allowedSet.contains(word.charAt(i))) continue;
-                else {
-                    flag = 1;
+        for (String s : words) {
+            for (int i = 0; i < s.length(); i++) {
+                if (!hash_set.contains(s.charAt(i))) {
+                    ans--;
                     break;
                 }
             }
-            if (flag == 0) consistentStrings++;
         }
-
-        return consistentStrings;
+        return ans;
     }
 
     public static void main(String[] args) {
         String allowed = "cad";
-        String [] words = {"cc","acd","b","ba","bac","bad","ac","d"};
+        String[] words = { "cc", "acd", "b", "ba", "bac", "bad", "ac", "d" };
 
         System.out.println("Result: " + countConsistentStrings(allowed, words));
     }
