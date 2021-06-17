@@ -6,20 +6,21 @@ import java.util.Arrays;
 public class HalvesAreAlike {
 
     public static boolean halvesAreAlike(String s) {
-        HashSet<Character> vowels = new HashSet<Character>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        
+        HashSet<Character> vowels = new HashSet<Character>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
         int stringLength = s.length();
-        int gap = stringLength / 2;
-        s = s.toLowerCase();
-        int firstHalfVowels = 0;
-        int secondHalfVowels = 0;
-
-        for (int i = 0; i < gap; i++) {
-            firstHalfVowels += vowels.contains(s.charAt(i)) ? 1 : 0;
-            secondHalfVowels += vowels.contains(s.charAt(i + gap)) ? 1 : 0;
+        int mid = stringLength / 2;
+        int total = 0;
+        
+        
+        for (int i = 0, j = mid; i < mid; i++, j++) {
+            if (vowels.contains(s.charAt(i))) total ++;
+            if (vowels.contains(s.charAt(j))) total --;
         }
-
-        return firstHalfVowels == secondHalfVowels;
+        
+        return total == 0;
     }
+    
 
     public static void main(String[] args) {
         String input = "book"; // true
