@@ -1,24 +1,16 @@
 package HalvesAreAlike;
 
-import java.util.HashSet;
-import java.util.Arrays;
-
 public class HalvesAreAlike {
 
+    static String vowels = "aeiouAEIOU";
+
     public static boolean halvesAreAlike(String s) {
-        
-        HashSet<Character> vowels = new HashSet<Character>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
-        int stringLength = s.length();
-        int mid = stringLength / 2;
-        int total = 0;
-        
-        
+        int mid = s.length() / 2, ans = 0;
         for (int i = 0, j = mid; i < mid; i++, j++) {
-            if (vowels.contains(s.charAt(i))) total ++;
-            if (vowels.contains(s.charAt(j))) total --;
+            if (vowels.indexOf(s.charAt(i)) >= 0) ans++;
+            if (vowels.indexOf(s.charAt(j)) >= 0) ans--;
         }
-        
-        return total == 0;
+        return ans == 0;
     }
     
 
